@@ -15,7 +15,6 @@ jobs:
     environment: ci
     env:
       SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_USER: TRAINING_CI_USER_${{ vars.PARTICIPANT_ID }}
       SNOWFLAKE_ROLE: TRAINING_CI_ROLE_${{ vars.PARTICIPANT_ID }}
       SNOWFLAKE_WAREHOUSE: TRAINING_WH
     steps:
