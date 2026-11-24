@@ -1,0 +1,25 @@
+# dbt generated files
+target/
+logs/
+dbt_packages/
+
+# Local credentials and keys
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.key
+connection.toml
+
+# Python/editor/operating system
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+.idea/
+.DS_Store
+
+# Local rescue files
+*.bak
+*.backup
