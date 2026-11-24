@@ -1,0 +1,32 @@
+# P99 rehearsal only: checks that GitHub Actions can log in to Snowflake
+# with OIDC (no keys, no secrets). Delete this file after the test.
+name: oidc-smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  oidc-smoke:
+    runs-on: ubuntu-latest
+    environment: ci
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: TRAINING_CI_USER_${{ vars.PARTICIPANT_ID }}
+      SNOWFLAKE_ROLE: TRAINING_CI_ROLE_${{ vars.PARTICIPANT_ID }}
+      SNOWFLAKE_WAREHOUSE: TRAINING_WH
+    steps:
+      - name: Install Snowflake CLI with OIDC
+        uses: snowflakedb/snowflake-actions@v3
+        with:
+          cli-version: "3.28.0"
+          use-oidc: true
+
+      - name: Test connection
+        run: snow connection test -x
+
+      - name: Who am I
+        run: snow sql -x -q "SELECT CURRENT_USER(), CURRENT_ROLE(), CURRENT_WAREHOUSE()"
