@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: sales_raw
+    database: TRAINING_DB
+    schema: RAW
+
+    tables:
+      - name: raw_customers
+      - name: raw_orders
